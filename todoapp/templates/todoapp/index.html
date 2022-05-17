@@ -10,23 +10,23 @@
             <label>Новая задача</label>
             <input type="text" name="title" placeholder="Введите название задачи"><br>
         </div>
-        <button class="ui teal basic button" type="submit">Добавить</button>
+        <button class="black button" type="submit">Добавить</button>
     </form>
 
 {% for todo in todo_list %}
 <div class="ui segment">
-    <p class="ui big header">№{{ todo.id }} {{ todo.title }}</p>
-
+    <p class="header">№{{ todo.id }} {{ todo.title }}</p>
     {% if todo.is_complete == False %}
-    <span class="ui gray label">Активно</span>
-    <a class="ui primary basic button" href="{% url 'update' todo_id=todo.id %}">Выполнить</a>
+    <span class="status1">Активно</span>
+    <a class="green button" href="{% url 'update' todo_id=todo.id %}">Выполнить</a>
     {% else %}
-    <span class="ui green label">Выполнено</span>
-    <a class="ui blue button" href="{% url 'update' todo_id=todo.id %}">Отменить</a>
+    <span class="status2">Выполнено</span>
+    <a class="blue button" href="{% url 'update' todo_id=todo.id %}">Отменить</a>
     {% endif %}
-    <a class="ui negative basic button" href="{% url 'delete' todo_id=todo.id %}">Удалить</a>
+    <a class="red button" href="{% url 'delete' todo_id=todo.id %}">Удалить</a>
 </div>
 {% endfor %}
 </div>
 
 {% endblock content %}
+
