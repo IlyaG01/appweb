@@ -1,32 +1,37 @@
-{% extends 'todoapp/layout.html' %}
+<!doctype html>
+<!--{% load static %}-->
 
-{% block content %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>{{ title }} </title>
+    <link rel="stylesheet" href="{% static 'todolist/css/uistyle.css' %}">
+    <link rel="stylesheet" href="{% static 'todolist/css/style.css' %}">
 
-<div style="margin-top: 50px;" class="ui container">
-    <h1 class="ui center aligned header">ТУДУ</h1>
-    <form class="ui form" action="{% url 'add' %}" method="post">
-        {% csrf_token %}
-        <div class="field">
-            <label>Новая задача</label>
-            <input type="text" name="title" placeholder="Введите название задачи"><br>
+</head>
+<body>
+    <div style="margin-top: 50px;" class="ui container">
+        <h1 class="ui center aligned header">ТУДУ</h1>
+        <div class="ui form">
+            <div class="field">
+                <label>Новая задача</label>
+                <input type="text" name="title" placeholder="Введите название задачи" id="newtask_title"><br>
+            </div>
+            <button class="black button" onclick="addTask()">Добавить</button>
         </div>
-        <button class="black button" type="submit">Добавить</button>
-    </form>
+        <div id="filter_group">
 
-{% for todo in todo_list %}
-<div class="ui segment">
-    <p class="header">№{{ todo.id }} {{ todo.title }}</p>
-    {% if todo.is_complete == False %}
-    <span class="status1">Активно</span>
-    <a class="green button" href="{% url 'update' todo_id=todo.id %}">Выполнить</a>
-    {% else %}
-    <span class="status2">Выполнено</span>
-    <a class="blue button" href="{% url 'update' todo_id=todo.id %}">Отменить</a>
-    {% endif %}
-    <a class="red button" href="{% url 'delete' todo_id=todo.id %}">Удалить</a>
-</div>
-{% endfor %}
-</div>
+        </div>
+    
+    <div id="tasks_list">
 
-{% endblock content %}
+    </div>
+    </div>
+    <script src="{% static 'todolist/js/code.js' %}" asp-append-version="true"></script>    
+    <script type="text/javascript"> ButtonsFilters();getTasks();</script>
 
+</body>
+</html>
